@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Call Logger</string>
+    <string name="app_subtitle">Monitor and sync your calls to ESPO CRM</string>
+    
+    <!-- Permissions -->
+    <string name="permission_call_log_rationale">This app needs access to call logs to monitor and sync your calls to ESPO CRM.</string>
+    <string name="permission_phone_state_rationale">This app needs access to phone state to detect incoming and outgoing calls.</string>
+    
+    <!-- Notifications -->
+    <string name="notification_channel_name">Call Log Service</string>
+    <string name="notification_channel_description">Notifications for call log monitoring service</string>
+    <string name="service_notification_title">Call Logger Active</string>
+    <string name="service_notification_text">Monitoring and syncing call logs</string>
+    
+    <!-- UI Labels -->
+    <string name="configuration_title">⚙️ Configuration</string>
+    <string name="service_control_title">🎛️ Service Control</string>
+    <string name="statistics_title">📊 Statistics</string>
+    <string name="call_logs_title">📞 Recent Call Logs</string>
+    <string name="tap_to_expand">Tap to expand details</string>
+    
+    <!-- Call Types -->
+    <string name="incoming_call">INCOMING CALL</string>
+    <string name="outgoing_call">OUTGOING CALL</string>
+    <string name="missed_call">MISSED CALL</string>
+    <string name="unknown_call">UNKNOWN CALL</string>
+    
+    <!-- Sync Status -->
+    <string name="synced">Synced</string>
+    <string name="pending">Queued</string>
+    <string name="failed">Failed</string>
+    
+    <!-- Statistics Labels -->
+    <string name="total_calls">Total Calls</string>
+    <string name="synced_calls">Synced</string>
+    <string name="pending_calls">Unsynced</string>
+    
+    <!-- Duration Format -->
+    <string name="duration_format">Duration: %s</string>
+    <string name="duration_zero">0 seconds</string>
+    
+    <!-- Contact -->
+    <string name="unknown_contact">Unknown Contact</string>
+    <string name="not_synced">Not synced</string>
+    
+    <!-- Additional Details -->
+    <string name="additional_details">Additional Details</string>
+    <string name="sync_attempts_label">Sync Attempts:</string>
+    <string name="espo_id_label">ESPO ID:</string>
+</resources>

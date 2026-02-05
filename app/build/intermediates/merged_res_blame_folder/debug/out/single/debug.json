@@ -1,0 +1,114 @@
+[
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_ic_sync_pending.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/ic_sync_pending.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_bg_status_completed.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/bg_status_completed.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_ic_sync_failed.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/ic_sync_failed.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_ic_notification_logo.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/ic_notification_logo.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/layout_item_call_log.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/layout/item_call_log.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_bg_sync_status.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/bg_sync_status.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.example.calllogger.app-main-44:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_ic_phone.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/ic_phone.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_ic_call_incoming.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/ic_call_incoming.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_bg_call_incoming.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/bg_call_incoming.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_bg_call_missed.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/bg_call_missed.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_ic_call_outgoing.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/ic_call_outgoing.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/layout_activity_main.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_bg_status_missed.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/bg_status_missed.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_bg_card_gradient.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/bg_card_gradient.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_bg_status_no_answer.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/bg_status_no_answer.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/menu_main_menu.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/menu/main_menu.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_ic_call_log_logo.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/ic_call_log_logo.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/xml_backup_rules.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_ic_sync_success.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/ic_sync_success.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/layout_activity_settings.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/layout/activity_settings.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_bg_call_outgoing.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/bg_call_outgoing.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_ic_call_missed.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/ic_call_missed.xml"
+    },
+    {
+        "merged": "com.example.calllogger.app-merged_res-42:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    }
+]
