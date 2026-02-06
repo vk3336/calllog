@@ -20,27 +20,25 @@ interface EspoApiService {
 
 data class EspoCallRequest(
     val name: String,
+    val status: String = "Planned",
+    val direction: String = "Outbound",
+    val cSeconds: String,
     val deleted: Boolean = false,
-    val status: String, // "Planned", "Held", "Not Held"
-    val duration: Int, // in seconds
-    val reminders: List<String> = emptyList(),
-    val direction: String, // "Inbound" or "Outbound"
-    val createdAt: String, // ISO format
-    val modifiedAt: String, // ISO format
+    val dateStart: String? = null,
+    val duration: Int? = null,
+    val reminders: List<Any> = emptyList(),
     val phoneNumbersMap: Map<String, Any> = emptyMap(),
     val parentName: String? = null,
     val accountName: String? = null,
     val usersIds: List<String> = emptyList(),
-    val usersNames: Map<String, String> = emptyMap(),
+    val usersNames: Map<String, Any> = emptyMap(),
     val usersColumns: Map<String, Any> = emptyMap(),
     val contactsIds: List<String> = emptyList(),
-    val contactsNames: Map<String, String> = emptyMap(),
+    val contactsNames: Map<String, Any> = emptyMap(),
     val contactsColumns: Map<String, Any> = emptyMap(),
     val leadsIds: List<String> = emptyList(),
-    val leadsNames: Map<String, String> = emptyMap(),
-    val leadsColumns: Map<String, Any> = emptyMap(),
-    val teamsIds: List<String> = emptyList(),
-    val teamsNames: Map<String, String> = emptyMap()
+    val leadsNames: Map<String, Any> = emptyMap(),
+    val leadsColumns: Map<String, Any> = emptyMap()
 )
 
 data class EspoCallResponse(
@@ -48,8 +46,10 @@ data class EspoCallResponse(
     val name: String,
     val deleted: Boolean = false,
     val status: String,
-    val duration: Int,
-    val reminders: List<String> = emptyList(),
+    val dateStart: String? = null,
+    val duration: Int? = null, // API might return this
+    val cSeconds: Int? = null, // Your API uses cSeconds for duration
+    val reminders: List<Any> = emptyList(),
     val direction: String,
     val createdAt: String,
     val modifiedAt: String,
@@ -57,18 +57,18 @@ data class EspoCallResponse(
     val parentName: String? = null,
     val accountName: String? = null,
     val usersIds: List<String> = emptyList(),
-    val usersNames: Map<String, String> = emptyMap(),
+    val usersNames: Map<String, Any> = emptyMap(),
     val usersColumns: Map<String, Any> = emptyMap(),
     val contactsIds: List<String> = emptyList(),
-    val contactsNames: Map<String, String> = emptyMap(),
+    val contactsNames: Map<String, Any> = emptyMap(),
     val contactsColumns: Map<String, Any> = emptyMap(),
     val leadsIds: List<String> = emptyList(),
-    val leadsNames: Map<String, String> = emptyMap(),
+    val leadsNames: Map<String, Any> = emptyMap(),
     val leadsColumns: Map<String, Any> = emptyMap(),
     val createdById: String? = null,
     val createdByName: String? = null,
     val modifiedByName: String? = null,
     val assignedUserName: String? = null,
     val teamsIds: List<String> = emptyList(),
-    val teamsNames: Map<String, String> = emptyMap()
+    val teamsNames: Map<String, Any> = emptyMap()
 )

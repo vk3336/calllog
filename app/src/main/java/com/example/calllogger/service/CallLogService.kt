@@ -305,10 +305,20 @@ class CallLogService : Service() {
                 val requestLog = buildString {
                     appendLine("📤 Sending to ESPO:")
                     appendLine("URL: ${actualEspoUrl ?: configManager.espoBaseUrl}")
+                    appendLine("\nRequest JSON:")
+                    appendLine("{")
+                    appendLine("  \"name\": \"${espoRequest.name}\",")
+                    appendLine("  \"status\": \"${espoRequest.status}\",")
+                    appendLine("  \"direction\": \"${espoRequest.direction}\",")
+                    appendLine("  \"cSeconds\": \"${espoRequest.cSeconds}\",")
+                    appendLine("  \"dateStart\": \"${espoRequest.dateStart}\",")
+                    appendLine("  \"deleted\": ${espoRequest.deleted}")
+                    appendLine("}")
+                    appendLine("\nCall Details:")
                     appendLine("Phone: ${call.phoneNumber}")
+                    appendLine("Contact: ${call.contactName ?: "Unknown"}")
                     appendLine("Type: ${call.getCallTypeString()}")
                     appendLine("Duration: ${call.duration}s")
-                    appendLine("Time: ${java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault()).format(java.util.Date(call.timestamp))}")
                 }
                 Log.d(TAG, requestLog)
                 broadcastApiResponse("📤 Syncing...", requestLog)
@@ -322,22 +332,26 @@ class CallLogService : Service() {
                         
                         val successLog = buildString {
                             appendLine("✅ SUCCESS!")
-                            appendLine("Status: ${response.code()} ${response.message()}")
+                            appendLine("HTTP Status: ${response.code()}")
+                            appendLine("\nResponse:")
                             appendLine("ESPO ID: ${espoCall.id}")
-                            appendLine("Call Name: ${espoCall.name}")
+                            appendLine("Name: ${espoCall.name}")
                             appendLine("Direction: ${espoCall.direction}")
                             appendLine("Status: ${espoCall.status}")
-                            appendLine("Duration: ${espoCall.duration}s")
+                            appendLine("cSeconds: ${espoCall.cSeconds}")
+                            appendLine("Duration: ${espoCall.duration}")
                             appendLine("Created: ${espoCall.createdAt}")
-                            appendLine("\nPhone: ${call.phoneNumber}")
+                            appendLine("\nOriginal Call:")
+                            appendLine("Phone: ${call.phoneNumber}")
                             appendLine("Contact: ${call.contactName ?: "Unknown"}")
+                            appendLine("Duration: ${call.duration}s")
                         }
                         
                         Log.d(TAG, "Successfully synced call: ${call.phoneNumber}")
                         Log.d(TAG, successLog)
                         broadcastApiResponse("✅ Sync Success", successLog)
                     } else {
-                        val errorLog = "⚠️ Response body is null\nStatus: ${response.code()}"
+                        val errorLog = "⚠️ Response body is null\nHTTP Status: ${response.code()}\n\nThe server returned success but no data."
                         Log.w(TAG, errorLog)
                         broadcastApiResponse("⚠️ Empty Response", errorLog)
                     }
@@ -347,15 +361,19 @@ class CallLogService : Service() {
                     val errorBody = response.errorBody()?.string() ?: "No error details"
                     val errorLog = buildString {
                         appendLine("❌ SYNC FAILED")
-                        appendLine("Status: ${response.code()} ${response.message()}")
-                        appendLine("Phone: ${call.phoneNumber}")
-                        appendLine("Error Details:")
+                        appendLine("HTTP Status: ${response.code()} ${response.message()}")
+                        appendLine("\nServer Error Response:")
                         appendLine(errorBody)
-                        appendLine("\nRequest Data:")
-                        appendLine("Name: ${espoRequest.name}")
-                        appendLine("Direction: ${espoRequest.direction}")
-                        appendLine("Status: ${espoRequest.status}")
-                        appendLine("Duration: ${espoRequest.duration}s")
+                        appendLine("\nRequest Sent:")
+                        appendLine("name: ${espoRequest.name}")
+                        appendLine("status: ${espoRequest.status}")
+                        appendLine("direction: ${espoRequest.direction}")
+                        appendLine("cSeconds: ${espoRequest.cSeconds}")
+                        appendLine("dateStart: ${espoRequest.dateStart}")
+                        appendLine("\nCall Details:")
+                        appendLine("Phone: ${call.phoneNumber}")
+                        appendLine("Type: ${call.getCallTypeString()}")
+                        appendLine("Duration: ${call.duration}s")
                     }
                     
                     Log.e(TAG, "Failed to sync call: ${response.code()} - ${response.message()}")
@@ -391,21 +409,30 @@ class CallLogService : Service() {
     }
     
     private fun createEspoCallRequest(call: CallLogEntity): EspoCallRequest {
+        // Format the call start date/time
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        val callDate = dateFormat.format(Date(call.timestamp))
+        val callStartTime = dateFormat.format(Date(call.timestamp))
         
+        // Determine direction based on call type
         val direction = when (call.callType) {
             CallLogEntity.INCOMING_TYPE -> "Inbound"
             CallLogEntity.OUTGOING_TYPE -> "Outbound"
-            else -> "Inbound" // Default for missed calls
+            CallLogEntity.MISSED_TYPE -> "Inbound" // Missed calls are inbound
+            CallLogEntity.REJECTED_TYPE -> "Inbound" // Rejected calls are inbound
+            CallLogEntity.BLOCKED_TYPE -> "Inbound" // Blocked calls are inbound
+            else -> "Inbound"
         }
         
+        // Determine status based on duration and call type
         val status = when {
-            call.duration > 0 -> "Held"
-            call.callType == CallLogEntity.MISSED_TYPE -> "Not Held"
-            else -> "Planned"
+            call.duration > 0 -> "Held" // Call was answered
+            call.callType == CallLogEntity.MISSED_TYPE -> "Not Held" // Missed call
+            call.callType == CallLogEntity.REJECTED_TYPE -> "Not Held" // Rejected call
+            call.callType == CallLogEntity.BLOCKED_TYPE -> "Not Held" // Blocked call
+            else -> "Planned" // Default
         }
         
+        // Create a descriptive name for the call
         val callName = buildString {
             append(call.getCallTypeString())
             append(" call")
@@ -416,18 +443,18 @@ class CallLogService : Service() {
             }
         }
         
-        // Create minimal request matching Postman success
+        // Return request with all fields matching your API structure
         return EspoCallRequest(
             name = callName,
-            deleted = false,
             status = status,
-            duration = call.duration.toInt(),
-            reminders = emptyList(),
             direction = direction,
-            createdAt = callDate,
-            modifiedAt = callDate,
-            phoneNumbersMap = emptyMap(), // Empty map like Postman
-            parentName = call.contactName,
+            cSeconds = call.duration.toString(),
+            deleted = false,
+            dateStart = callStartTime,
+            duration = null, // Let ESPO calculate from cSeconds
+            reminders = emptyList(),
+            phoneNumbersMap = emptyMap(),
+            parentName = null,
             accountName = null,
             usersIds = emptyList(),
             usersNames = emptyMap(),
@@ -437,9 +464,7 @@ class CallLogService : Service() {
             contactsColumns = emptyMap(),
             leadsIds = emptyList(),
             leadsNames = emptyMap(),
-            leadsColumns = emptyMap(),
-            teamsIds = emptyList(),
-            teamsNames = emptyMap()
+            leadsColumns = emptyMap()
         )
     }
 }
