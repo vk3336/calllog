@@ -310,6 +310,7 @@ class CallLogService : Service() {
                     appendLine("  \"name\": \"${espoRequest.name}\",")
                     appendLine("  \"status\": \"${espoRequest.status}\",")
                     appendLine("  \"direction\": \"${espoRequest.direction}\",")
+                    appendLine("  \"phone\": \"${espoRequest.phone}\",")
                     appendLine("  \"cSeconds\": \"${espoRequest.cSeconds}\",")
                     appendLine("  \"dateStart\": \"${espoRequest.dateStart}\",")
                     appendLine("  \"deleted\": ${espoRequest.deleted}")
@@ -448,12 +449,12 @@ class CallLogService : Service() {
             name = callName,
             status = status,
             direction = direction,
+            phone = call.phoneNumber,
             cSeconds = call.duration.toString(),
             deleted = false,
             dateStart = callStartTime,
-            duration = null, // Let ESPO calculate from cSeconds
+            duration = null,
             reminders = emptyList(),
-            phoneNumbersMap = emptyMap(),
             parentName = null,
             accountName = null,
             usersIds = emptyList(),
