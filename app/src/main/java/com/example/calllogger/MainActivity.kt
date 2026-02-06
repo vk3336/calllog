@@ -17,6 +17,12 @@ import com.example.calllogger.service.CallLogService
 import com.example.calllogger.util.ConfigManager
 import com.example.calllogger.util.PermissionUtil
 import kotlinx.coroutines.launch
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.IntentFilter
+import android.graphics.Color
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     
@@ -24,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var configManager: ConfigManager
     private lateinit var database: AppDatabase
     private lateinit var callLogAdapter: CallLogAdapter
+    private var apiResponseReceiver: BroadcastReceiver? = null
     
     companion object {
         private const val TAG = "MainActivity"
@@ -38,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         database = AppDatabase.getDatabase(this)
         
         setupUI()
+        setupApiResponseReceiver()
         checkPermissionsAndStart()
         
         // Immediately try to read call logs if permissions are available
@@ -95,9 +103,106 @@ class MainActivity : AppCompatActivity() {
             updateSyncStatus()
         }
         
+        // Test sync button
+        binding.buttonTestSync.setOnClickListener {
+            testSyncNow()
+        }
+        
+        // Clear API response button
+        binding.buttonClearResponse.setOnClickListener {
+            clearApiResponse()
+        }
+        
         // Observe call logs
         observeCallLogs()
         updateStats()
+    }
+    
+    private fun setupApiResponseReceiver() {
+        apiResponseReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                if (intent?.action == "com.example.calllogger.API_RESPONSE") {
+                    val status = intent.getStringExtra("status") ?: "Unknown"
+                    val message = intent.getStringExtra("message") ?: "No message"
+                    val timestamp = intent.getLongExtra("timestamp", System.currentTimeMillis())
+                    
+                    updateApiResponse(status, message, timestamp)
+                }
+            }
+        }
+        
+        val filter = IntentFilter("com.example.calllogger.API_RESPONSE")
+        registerReceiver(apiResponseReceiver, filter, Context.RECEIVER_NOT_EXPORTED)
+    }
+    
+    private fun updateApiResponse(status: String, message: String, timestamp: Long) {
+        runOnUiThread {
+            val timeFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+            val timeStr = timeFormat.format(Date(timestamp))
+            
+            val fullMessage = buildString {
+                appendLine("[$timeStr] $status")
+                appendLine("─".repeat(40))
+                appendLine(message)
+            }
+            
+            binding.textViewApiResponse.text = fullMessage
+            binding.textViewApiStatus.text = "Status: $status"
+            
+            // Color code the status
+            when {
+                status.contains("✅") || status.contains("SUCCESS", ignoreCase = true) -> {
+                    binding.textViewApiStatus.setTextColor(Color.parseColor("#4CAF50"))
+                }
+                status.contains("❌") || status.contains("FAIL", ignoreCase = true) || status.contains("ERROR", ignoreCase = true) -> {
+                    binding.textViewApiStatus.setTextColor(Color.parseColor("#F44336"))
+                }
+                status.contains("📤") || status.contains("Syncing", ignoreCase = true) -> {
+                    binding.textViewApiStatus.setTextColor(Color.parseColor("#2196F3"))
+                }
+                else -> {
+                    binding.textViewApiStatus.setTextColor(Color.parseColor("#FF9800"))
+                }
+            }
+            
+            Log.d(TAG, "API Response updated: $status")
+        }
+    }
+    
+    private fun clearApiResponse() {
+        binding.textViewApiResponse.text = "Response cleared. Waiting for next sync..."
+        binding.textViewApiStatus.text = "Status: Idle"
+        binding.textViewApiStatus.setTextColor(Color.parseColor("#757575"))
+        Toast.makeText(this, "API response cleared", Toast.LENGTH_SHORT).show()
+    }
+    
+    private fun testSyncNow() {
+        if (!configManager.isEspoConfigured()) {
+            Toast.makeText(this, "Please configure ESPO first", Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        if (!configManager.isSyncEnabled) {
+            Toast.makeText(this, "Please enable sync first", Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        lifecycleScope.launch {
+            val unsyncedCount = database.callLogDao().getCallLogCount() - database.callLogDao().getSyncedCallLogCount()
+            
+            if (unsyncedCount == 0) {
+                Toast.makeText(this@MainActivity, "No unsynced calls to test", Toast.LENGTH_SHORT).show()
+                updateApiResponse("ℹ️ No Data", "All calls are already synced.\n\nMake a test call or wait for new calls.", System.currentTimeMillis())
+            } else {
+                Toast.makeText(this@MainActivity, "Testing sync for $unsyncedCount call(s)...", Toast.LENGTH_SHORT).show()
+                updateApiResponse("🔄 Testing", "Triggering manual sync for $unsyncedCount unsynced call(s)...", System.currentTimeMillis())
+                
+                // Trigger the service to sync immediately
+                val serviceIntent = Intent(this@MainActivity, CallLogService::class.java)
+                serviceIntent.putExtra("force_sync", true)
+                startForegroundService(serviceIntent)
+            }
+        }
     }
     
     private fun loadConfiguration() {
@@ -119,12 +224,35 @@ class MainActivity : AppCompatActivity() {
             return
         }
         
+        // Save phone number
         configManager.phoneNumber = phoneNumber
-        configManager.espoBaseUrl = if (!espoUrl.endsWith("/") && espoUrl.isNotEmpty()) "$espoUrl/" else espoUrl
+        
+        // Save ESPO URL - remove trailing slash if present
+        val cleanUrl = espoUrl.trimEnd('/')
+        configManager.espoBaseUrl = cleanUrl
+        
+        // Save API key
         configManager.espoApiKey = apiKey
+        
+        Log.d(TAG, "Configuration saved:")
+        Log.d(TAG, "Phone: $phoneNumber")
+        Log.d(TAG, "ESPO URL: $cleanUrl")
+        Log.d(TAG, "API Key: ${if (apiKey.isNotBlank()) "Present" else "Missing"}")
         
         Toast.makeText(this, "Configuration saved", Toast.LENGTH_SHORT).show()
         updateSyncStatus()
+        
+        // Restart service to reinitialize API with new config
+        if (configManager.isEspoConfigured()) {
+            Log.d(TAG, "ESPO is configured, restarting service...")
+            stopCallLogService()
+            binding.root.postDelayed({
+                startCallLogService()
+                Toast.makeText(this, "Service restarted with new configuration", Toast.LENGTH_SHORT).show()
+            }, 1000)
+        } else {
+            Log.d(TAG, "ESPO not fully configured yet")
+        }
         
         // Immediately load call logs after saving phone number
         if (PermissionUtil.hasCallLogPermission(this)) {
@@ -389,6 +517,13 @@ class MainActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 readCallLogsDirectly()
             }
+        }
+    }
+    
+    override fun onDestroy() {
+        super.onDestroy()
+        apiResponseReceiver?.let {
+            unregisterReceiver(it)
         }
     }
     

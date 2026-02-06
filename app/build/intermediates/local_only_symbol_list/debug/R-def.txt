@@ -47,10 +47,12 @@ drawable ic_sync_failed
 drawable ic_sync_pending
 drawable ic_sync_success
 id action_settings
+id buttonClearResponse
 id buttonSave
 id buttonSaveConfig
 id buttonStartService
 id buttonStopService
+id buttonTestSync
 id editTextApiKey
 id editTextEspoUrl
 id editTextPhoneNumber
@@ -66,6 +68,8 @@ id layoutTranscription
 id layoutViaNumber
 id recyclerViewCallLogs
 id switchSyncEnabled
+id textViewApiResponse
+id textViewApiStatus
 id textViewCallStatus
 id textViewCallTypeLabel
 id textViewContactName

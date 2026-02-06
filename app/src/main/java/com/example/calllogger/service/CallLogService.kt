@@ -30,6 +30,7 @@ class CallLogService : Service() {
     private lateinit var database: AppDatabase
     private lateinit var configManager: ConfigManager
     private var espoApiService: EspoApiService? = null
+    private var actualEspoUrl: String? = null // Store the actual URL being used
     
     companion object {
         private const val TAG = "CallLogService"
@@ -50,6 +51,20 @@ class CallLogService : Service() {
         
         val notification = createNotification()
         startForeground(NOTIFICATION_ID, notification)
+        
+        // Check if this is a force sync request
+        val forceSync = intent?.getBooleanExtra("force_sync", false) ?: false
+        
+        if (forceSync) {
+            Log.d(TAG, "Force sync requested")
+            serviceScope.launch {
+                if (configManager.isSyncEnabled) {
+                    syncUnsyncedCallLogs()
+                } else {
+                    broadcastApiResponse("⚠️ Sync Disabled", "Enable sync toggle to test sync")
+                }
+            }
+        }
         
         // Start monitoring call logs
         startCallLogMonitoring()
@@ -84,17 +99,39 @@ class CallLogService : Service() {
         val baseUrl = configManager.espoBaseUrl
         val apiKey = configManager.espoApiKey
         
+        Log.d(TAG, "Initializing ESPO API...")
+        Log.d(TAG, "Base URL from config: '$baseUrl'")
+        Log.d(TAG, "API Key present: ${!apiKey.isNullOrBlank()}")
+        
         if (!baseUrl.isNullOrBlank() && !apiKey.isNullOrBlank()) {
             try {
-                espoApiService = RetrofitClient.getInstance().createEspoApiService(baseUrl, apiKey)
-                Log.d(TAG, "ESPO API initialized with URL: $baseUrl")
+                // Ensure URL ends with / (Retrofit requires trailing slash for base URL)
+                // The endpoint "Call" will be appended by Retrofit
+                val finalUrl = if (baseUrl.endsWith("/")) baseUrl else "$baseUrl/"
+                
+                actualEspoUrl = "${finalUrl}Call" // Store actual endpoint URL for logging
+                Log.d(TAG, "Base URL for Retrofit: '$finalUrl'")
+                Log.d(TAG, "Actual endpoint will be: '$actualEspoUrl'")
+                
+                espoApiService = RetrofitClient.getInstance().createEspoApiService(finalUrl, apiKey)
+                Log.d(TAG, "✅ ESPO API initialized successfully")
+                broadcastApiResponse("✅ API Initialized", "ESPO Endpoint: $actualEspoUrl\nAPI Key: ${apiKey.take(10)}...\n\nReady to sync!")
             } catch (e: Exception) {
-                Log.e(TAG, "Failed to initialize ESPO API", e)
+                Log.e(TAG, "❌ Failed to initialize ESPO API", e)
+                broadcastApiResponse("❌ API Init Failed", "Error: ${e.message}\n\nURL: $baseUrl\nException: ${e.javaClass.simpleName}\n\nStack:\n${e.stackTraceToString().take(300)}")
                 espoApiService = null
+                actualEspoUrl = null
             }
         } else {
             Log.d(TAG, "ESPO API not configured - sync will be disabled")
+            if (baseUrl.isNullOrBlank()) {
+                Log.d(TAG, "Missing: Base URL")
+            }
+            if (apiKey.isNullOrBlank()) {
+                Log.d(TAG, "Missing: API Key")
+            }
             espoApiService = null
+            actualEspoUrl = null
         }
     }
     
@@ -242,36 +279,115 @@ class CallLogService : Service() {
         // Only sync if ESPO is properly configured
         if (!configManager.isEspoConfigured()) {
             Log.d(TAG, "ESPO not configured, skipping sync")
+            broadcastApiResponse("❌ ESPO not configured", "Configure ESPO URL and API Key first")
             return
         }
         
-        val espoApi = espoApiService ?: return
+        val espoApi = espoApiService ?: run {
+            broadcastApiResponse("❌ API Service Error", "ESPO API service not initialized")
+            return
+        }
+        
         val unsyncedCalls = database.callLogDao().getUnsyncedCallLogs()
         
         Log.d(TAG, "Found ${unsyncedCalls.size} unsynced calls")
         
+        if (unsyncedCalls.isEmpty()) {
+            broadcastApiResponse("✅ All Synced", "No pending calls to sync")
+            return
+        }
+        
         for (call in unsyncedCalls) {
             try {
                 val espoRequest = createEspoCallRequest(call)
+                
+                // Log the request being sent
+                val requestLog = buildString {
+                    appendLine("📤 Sending to ESPO:")
+                    appendLine("URL: ${actualEspoUrl ?: configManager.espoBaseUrl}")
+                    appendLine("Phone: ${call.phoneNumber}")
+                    appendLine("Type: ${call.getCallTypeString()}")
+                    appendLine("Duration: ${call.duration}s")
+                    appendLine("Time: ${java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault()).format(java.util.Date(call.timestamp))}")
+                }
+                Log.d(TAG, requestLog)
+                broadcastApiResponse("📤 Syncing...", requestLog)
+                
                 val response = espoApi.createCall(espoRequest)
                 
                 if (response.isSuccessful) {
                     val espoCall = response.body()
                     if (espoCall != null) {
                         database.callLogDao().markAsSynced(call.id, espoCall.id)
+                        
+                        val successLog = buildString {
+                            appendLine("✅ SUCCESS!")
+                            appendLine("Status: ${response.code()} ${response.message()}")
+                            appendLine("ESPO ID: ${espoCall.id}")
+                            appendLine("Call Name: ${espoCall.name}")
+                            appendLine("Direction: ${espoCall.direction}")
+                            appendLine("Status: ${espoCall.status}")
+                            appendLine("Duration: ${espoCall.duration}s")
+                            appendLine("Created: ${espoCall.createdAt}")
+                            appendLine("\nPhone: ${call.phoneNumber}")
+                            appendLine("Contact: ${call.contactName ?: "Unknown"}")
+                        }
+                        
                         Log.d(TAG, "Successfully synced call: ${call.phoneNumber}")
+                        Log.d(TAG, successLog)
+                        broadcastApiResponse("✅ Sync Success", successLog)
+                    } else {
+                        val errorLog = "⚠️ Response body is null\nStatus: ${response.code()}"
+                        Log.w(TAG, errorLog)
+                        broadcastApiResponse("⚠️ Empty Response", errorLog)
                     }
                 } else {
                     database.callLogDao().incrementSyncAttempts(call.id, System.currentTimeMillis())
+                    
+                    val errorBody = response.errorBody()?.string() ?: "No error details"
+                    val errorLog = buildString {
+                        appendLine("❌ SYNC FAILED")
+                        appendLine("Status: ${response.code()} ${response.message()}")
+                        appendLine("Phone: ${call.phoneNumber}")
+                        appendLine("Error Details:")
+                        appendLine(errorBody)
+                        appendLine("\nRequest Data:")
+                        appendLine("Name: ${espoRequest.name}")
+                        appendLine("Direction: ${espoRequest.direction}")
+                        appendLine("Status: ${espoRequest.status}")
+                        appendLine("Duration: ${espoRequest.duration}s")
+                    }
+                    
                     Log.e(TAG, "Failed to sync call: ${response.code()} - ${response.message()}")
+                    Log.e(TAG, "Error body: $errorBody")
+                    broadcastApiResponse("❌ Sync Failed", errorLog)
                 }
             } catch (e: Exception) {
                 database.callLogDao().incrementSyncAttempts(call.id, System.currentTimeMillis())
+                
+                val exceptionLog = buildString {
+                    appendLine("❌ EXCEPTION")
+                    appendLine("Phone: ${call.phoneNumber}")
+                    appendLine("Error: ${e.javaClass.simpleName}")
+                    appendLine("Message: ${e.message}")
+                    appendLine("\nStack trace:")
+                    appendLine(e.stackTraceToString().take(500))
+                }
+                
                 Log.e(TAG, "Exception syncing call: ${call.phoneNumber}", e)
+                broadcastApiResponse("❌ Exception", exceptionLog)
             }
         }
         
         configManager.lastSyncTime = System.currentTimeMillis()
+    }
+    
+    private fun broadcastApiResponse(status: String, message: String) {
+        val intent = Intent("com.example.calllogger.API_RESPONSE")
+        intent.putExtra("status", status)
+        intent.putExtra("message", message)
+        intent.putExtra("timestamp", System.currentTimeMillis())
+        sendBroadcast(intent)
     }
     
     private fun createEspoCallRequest(call: CallLogEntity): EspoCallRequest {
@@ -284,17 +400,46 @@ class CallLogService : Service() {
             else -> "Inbound" // Default for missed calls
         }
         
-        val status = if (call.duration > 0) "Held" else "Not Held"
+        val status = when {
+            call.duration > 0 -> "Held"
+            call.callType == CallLogEntity.MISSED_TYPE -> "Not Held"
+            else -> "Planned"
+        }
         
+        val callName = buildString {
+            append(call.getCallTypeString())
+            append(" call")
+            if (!call.contactName.isNullOrBlank()) {
+                append(" with ${call.contactName}")
+            } else {
+                append(" - ${call.phoneNumber}")
+            }
+        }
+        
+        // Create minimal request matching Postman success
         return EspoCallRequest(
-            name = "${call.getCallTypeString()} call with ${call.contactName ?: call.phoneNumber}",
-            phoneNumber = call.phoneNumber,
-            direction = direction,
+            name = callName,
+            deleted = false,
             status = status,
-            dateStart = callDate,
             duration = call.duration.toInt(),
-            contactName = call.contactName,
-            description = "Call logged automatically from ${configManager.phoneNumber}"
+            reminders = emptyList(),
+            direction = direction,
+            createdAt = callDate,
+            modifiedAt = callDate,
+            phoneNumbersMap = emptyMap(), // Empty map like Postman
+            parentName = call.contactName,
+            accountName = null,
+            usersIds = emptyList(),
+            usersNames = emptyMap(),
+            usersColumns = emptyMap(),
+            contactsIds = emptyList(),
+            contactsNames = emptyMap(),
+            contactsColumns = emptyMap(),
+            leadsIds = emptyList(),
+            leadsNames = emptyMap(),
+            leadsColumns = emptyMap(),
+            teamsIds = emptyList(),
+            teamsNames = emptyMap()
         )
     }
 }

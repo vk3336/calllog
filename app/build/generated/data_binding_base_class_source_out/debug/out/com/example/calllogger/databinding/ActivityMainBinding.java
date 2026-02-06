@@ -24,6 +24,9 @@ public final class ActivityMainBinding implements ViewBinding {
   private final ScrollView rootView;
 
   @NonNull
+  public final Button buttonClearResponse;
+
+  @NonNull
   public final Button buttonSaveConfig;
 
   @NonNull
@@ -31,6 +34,9 @@ public final class ActivityMainBinding implements ViewBinding {
 
   @NonNull
   public final Button buttonStopService;
+
+  @NonNull
+  public final Button buttonTestSync;
 
   @NonNull
   public final TextInputEditText editTextApiKey;
@@ -46,6 +52,12 @@ public final class ActivityMainBinding implements ViewBinding {
 
   @NonNull
   public final Switch switchSyncEnabled;
+
+  @NonNull
+  public final TextView textViewApiResponse;
+
+  @NonNull
+  public final TextView textViewApiStatus;
 
   @NonNull
   public final TextView textViewLastSync;
@@ -65,23 +77,29 @@ public final class ActivityMainBinding implements ViewBinding {
   @NonNull
   public final TextView textViewTotalCalls;
 
-  private ActivityMainBinding(@NonNull ScrollView rootView, @NonNull Button buttonSaveConfig,
-      @NonNull Button buttonStartService, @NonNull Button buttonStopService,
+  private ActivityMainBinding(@NonNull ScrollView rootView, @NonNull Button buttonClearResponse,
+      @NonNull Button buttonSaveConfig, @NonNull Button buttonStartService,
+      @NonNull Button buttonStopService, @NonNull Button buttonTestSync,
       @NonNull TextInputEditText editTextApiKey, @NonNull TextInputEditText editTextEspoUrl,
       @NonNull TextInputEditText editTextPhoneNumber, @NonNull RecyclerView recyclerViewCallLogs,
-      @NonNull Switch switchSyncEnabled, @NonNull TextView textViewLastSync,
+      @NonNull Switch switchSyncEnabled, @NonNull TextView textViewApiResponse,
+      @NonNull TextView textViewApiStatus, @NonNull TextView textViewLastSync,
       @NonNull TextView textViewPendingCalls, @NonNull TextView textViewServiceStatus,
       @NonNull TextView textViewSyncStatus, @NonNull TextView textViewSyncedCalls,
       @NonNull TextView textViewTotalCalls) {
     this.rootView = rootView;
+    this.buttonClearResponse = buttonClearResponse;
     this.buttonSaveConfig = buttonSaveConfig;
     this.buttonStartService = buttonStartService;
     this.buttonStopService = buttonStopService;
+    this.buttonTestSync = buttonTestSync;
     this.editTextApiKey = editTextApiKey;
     this.editTextEspoUrl = editTextEspoUrl;
     this.editTextPhoneNumber = editTextPhoneNumber;
     this.recyclerViewCallLogs = recyclerViewCallLogs;
     this.switchSyncEnabled = switchSyncEnabled;
+    this.textViewApiResponse = textViewApiResponse;
+    this.textViewApiStatus = textViewApiStatus;
     this.textViewLastSync = textViewLastSync;
     this.textViewPendingCalls = textViewPendingCalls;
     this.textViewServiceStatus = textViewServiceStatus;
@@ -117,6 +135,12 @@ public final class ActivityMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.buttonClearResponse;
+      Button buttonClearResponse = ViewBindings.findChildViewById(rootView, id);
+      if (buttonClearResponse == null) {
+        break missingId;
+      }
+
       id = R.id.buttonSaveConfig;
       Button buttonSaveConfig = ViewBindings.findChildViewById(rootView, id);
       if (buttonSaveConfig == null) {
@@ -132,6 +156,12 @@ public final class ActivityMainBinding implements ViewBinding {
       id = R.id.buttonStopService;
       Button buttonStopService = ViewBindings.findChildViewById(rootView, id);
       if (buttonStopService == null) {
+        break missingId;
+      }
+
+      id = R.id.buttonTestSync;
+      Button buttonTestSync = ViewBindings.findChildViewById(rootView, id);
+      if (buttonTestSync == null) {
         break missingId;
       }
 
@@ -162,6 +192,18 @@ public final class ActivityMainBinding implements ViewBinding {
       id = R.id.switchSyncEnabled;
       Switch switchSyncEnabled = ViewBindings.findChildViewById(rootView, id);
       if (switchSyncEnabled == null) {
+        break missingId;
+      }
+
+      id = R.id.textViewApiResponse;
+      TextView textViewApiResponse = ViewBindings.findChildViewById(rootView, id);
+      if (textViewApiResponse == null) {
+        break missingId;
+      }
+
+      id = R.id.textViewApiStatus;
+      TextView textViewApiStatus = ViewBindings.findChildViewById(rootView, id);
+      if (textViewApiStatus == null) {
         break missingId;
       }
 
@@ -201,10 +243,11 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMainBinding((ScrollView) rootView, buttonSaveConfig, buttonStartService,
-          buttonStopService, editTextApiKey, editTextEspoUrl, editTextPhoneNumber,
-          recyclerViewCallLogs, switchSyncEnabled, textViewLastSync, textViewPendingCalls,
-          textViewServiceStatus, textViewSyncStatus, textViewSyncedCalls, textViewTotalCalls);
+      return new ActivityMainBinding((ScrollView) rootView, buttonClearResponse, buttonSaveConfig,
+          buttonStartService, buttonStopService, buttonTestSync, editTextApiKey, editTextEspoUrl,
+          editTextPhoneNumber, recyclerViewCallLogs, switchSyncEnabled, textViewApiResponse,
+          textViewApiStatus, textViewLastSync, textViewPendingCalls, textViewServiceStatus,
+          textViewSyncStatus, textViewSyncedCalls, textViewTotalCalls);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

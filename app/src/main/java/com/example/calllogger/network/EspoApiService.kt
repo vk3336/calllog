@@ -20,23 +20,55 @@ interface EspoApiService {
 
 data class EspoCallRequest(
     val name: String,
-    val phoneNumber: String,
-    val direction: String, // "Inbound" or "Outbound"
-    val status: String, // "Held", "Not Held"
-    val dateStart: String, // ISO format
+    val deleted: Boolean = false,
+    val status: String, // "Planned", "Held", "Not Held"
     val duration: Int, // in seconds
-    val description: String? = null,
-    val contactName: String? = null
+    val reminders: List<String> = emptyList(),
+    val direction: String, // "Inbound" or "Outbound"
+    val createdAt: String, // ISO format
+    val modifiedAt: String, // ISO format
+    val phoneNumbersMap: Map<String, Any> = emptyMap(),
+    val parentName: String? = null,
+    val accountName: String? = null,
+    val usersIds: List<String> = emptyList(),
+    val usersNames: Map<String, String> = emptyMap(),
+    val usersColumns: Map<String, Any> = emptyMap(),
+    val contactsIds: List<String> = emptyList(),
+    val contactsNames: Map<String, String> = emptyMap(),
+    val contactsColumns: Map<String, Any> = emptyMap(),
+    val leadsIds: List<String> = emptyList(),
+    val leadsNames: Map<String, String> = emptyMap(),
+    val leadsColumns: Map<String, Any> = emptyMap(),
+    val teamsIds: List<String> = emptyList(),
+    val teamsNames: Map<String, String> = emptyMap()
 )
 
 data class EspoCallResponse(
     val id: String,
     val name: String,
-    val phoneNumber: String,
-    val direction: String,
+    val deleted: Boolean = false,
     val status: String,
-    val dateStart: String,
     val duration: Int,
-    val description: String?,
-    val contactName: String?
+    val reminders: List<String> = emptyList(),
+    val direction: String,
+    val createdAt: String,
+    val modifiedAt: String,
+    val phoneNumbersMap: Map<String, Any> = emptyMap(),
+    val parentName: String? = null,
+    val accountName: String? = null,
+    val usersIds: List<String> = emptyList(),
+    val usersNames: Map<String, String> = emptyMap(),
+    val usersColumns: Map<String, Any> = emptyMap(),
+    val contactsIds: List<String> = emptyList(),
+    val contactsNames: Map<String, String> = emptyMap(),
+    val contactsColumns: Map<String, Any> = emptyMap(),
+    val leadsIds: List<String> = emptyList(),
+    val leadsNames: Map<String, String> = emptyMap(),
+    val leadsColumns: Map<String, Any> = emptyMap(),
+    val createdById: String? = null,
+    val createdByName: String? = null,
+    val modifiedByName: String? = null,
+    val assignedUserName: String? = null,
+    val teamsIds: List<String> = emptyList(),
+    val teamsNames: Map<String, String> = emptyMap()
 )
