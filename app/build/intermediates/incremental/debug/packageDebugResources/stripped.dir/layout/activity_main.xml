@@ -271,16 +271,17 @@
 
                 <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="300dp"
                     android:background="#F5F5F5"
-                    android:padding="12dp">
+                    android:padding="12dp"
+                    android:scrollbars="vertical">
 
                     <TextView
                         android:id="@+id/textViewApiResponse"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="No API calls yet. Waiting for sync..."
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textColor="@color/text_secondary"
                         android:fontFamily="monospace"
                         android:textIsSelectable="true" />

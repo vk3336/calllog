@@ -20,6 +20,7 @@ import com.example.calllogger.network.EspoCallRequest
 import com.example.calllogger.network.RetrofitClient
 import com.example.calllogger.util.ConfigManager
 import com.example.calllogger.util.PermissionUtil
+import com.google.gson.GsonBuilder
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -301,28 +302,25 @@ class CallLogService : Service() {
             try {
                 val espoRequest = createEspoCallRequest(call)
                 
-                // Log the request being sent
+                // Create Gson for pretty JSON logging
+                val gson = GsonBuilder().setPrettyPrinting().create()
+                val requestJson = gson.toJson(espoRequest)
+                
+                // Log COMPLETE request
                 val requestLog = buildString {
-                    appendLine("📤 Sending to ESPO:")
-                    appendLine("URL: ${actualEspoUrl ?: configManager.espoBaseUrl}")
-                    appendLine("\nRequest JSON:")
-                    appendLine("{")
-                    appendLine("  \"name\": \"${espoRequest.name}\",")
-                    appendLine("  \"status\": \"${espoRequest.status}\",")
-                    appendLine("  \"direction\": \"${espoRequest.direction}\",")
-                    appendLine("  \"phone\": \"${espoRequest.phone}\",")
-                    appendLine("  \"cSeconds\": \"${espoRequest.cSeconds}\",")
-                    appendLine("  \"dateStart\": \"${espoRequest.dateStart}\",")
-                    appendLine("  \"deleted\": ${espoRequest.deleted}")
-                    appendLine("}")
-                    appendLine("\nCall Details:")
-                    appendLine("Phone: ${call.phoneNumber}")
-                    appendLine("Contact: ${call.contactName ?: "Unknown"}")
-                    appendLine("Type: ${call.getCallTypeString()}")
-                    appendLine("Duration: ${call.duration}s")
+                    appendLine("📤 SENDING TO ESPO")
+                    appendLine("═".repeat(50))
+                    appendLine("🌐 URL: ${actualEspoUrl ?: configManager.espoBaseUrl}")
+                    appendLine()
+                    appendLine("📋 COMPLETE REQUEST JSON:")
+                    appendLine(requestJson)
+                    appendLine()
+                    appendLine("📞 Call: ${call.phoneNumber} (${call.contactName ?: "Unknown"})")
                 }
                 Log.d(TAG, requestLog)
                 broadcastApiResponse("📤 Syncing...", requestLog)
+                
+                delay(500) // Ensure UI receives the broadcast
                 
                 val response = espoApi.createCall(espoRequest)
                 
@@ -331,30 +329,54 @@ class CallLogService : Service() {
                     if (espoCall != null) {
                         database.callLogDao().markAsSynced(call.id, espoCall.id)
                         
+                        val responseJson = gson.toJson(espoCall)
+                        
                         val successLog = buildString {
-                            appendLine("✅ SUCCESS!")
-                            appendLine("HTTP Status: ${response.code()}")
-                            appendLine("\nResponse:")
-                            appendLine("ESPO ID: ${espoCall.id}")
-                            appendLine("Name: ${espoCall.name}")
-                            appendLine("Direction: ${espoCall.direction}")
-                            appendLine("Status: ${espoCall.status}")
-                            appendLine("cSeconds: ${espoCall.cSeconds}")
-                            appendLine("Duration: ${espoCall.duration}")
-                            appendLine("Created: ${espoCall.createdAt}")
-                            appendLine("\nOriginal Call:")
-                            appendLine("Phone: ${call.phoneNumber}")
-                            appendLine("Contact: ${call.contactName ?: "Unknown"}")
-                            appendLine("Duration: ${call.duration}s")
+                            appendLine("✅ SYNC SUCCESS!")
+                            appendLine("═".repeat(50))
+                            appendLine("📊 HTTP: ${response.code()} ${response.message()}")
+                            appendLine()
+                            appendLine("📥 COMPLETE RESPONSE JSON:")
+                            appendLine(responseJson)
+                            appendLine()
+                            appendLine("🔍 COMPARISON:")
+                            appendLine("─".repeat(50))
+                            appendLine("name: ${espoRequest.name}")
+                            appendLine("  →  ${espoCall.name}")
+                            if (espoCall.name != espoRequest.name) appendLine("  ⚠️ CHANGED!")
+                            appendLine()
+                            appendLine("status: ${espoRequest.status}")
+                            appendLine("  →  ${espoCall.status}")
+                            if (espoCall.status != espoRequest.status) appendLine("  ⚠️ CHANGED!")
+                            appendLine()
+                            appendLine("direction: ${espoRequest.direction}")
+                            appendLine("  →  ${espoCall.direction}")
+                            if (espoCall.direction != espoRequest.direction) appendLine("  ⚠️ CHANGED!")
+                            appendLine()
+                            appendLine("phoneNumbersMap: ${espoRequest.phoneNumbersMap}")
+                            appendLine("  →  ${espoCall.phoneNumbersMap}")
+                            if (espoCall.phoneNumbersMap != espoRequest.phoneNumbersMap) appendLine("  ⚠️ CHANGED!")
+                            appendLine()
+                            appendLine("📌 ESPO ID: ${espoCall.id}")
+                            appendLine("📅 Created: ${espoCall.createdAt}")
+                            appendLine()
+                            if (espoCall.name != espoRequest.name || 
+                                espoCall.status != espoRequest.status || 
+                                espoCall.direction != espoRequest.direction ||
+                                espoCall.phoneNumbersMap != espoRequest.phoneNumbersMap) {
+                                appendLine("⚠️ ESPO MODIFIED DATA!")
+                                appendLine("Check: Admin → Workflows/Formula")
+                            }
                         }
                         
-                        Log.d(TAG, "Successfully synced call: ${call.phoneNumber}")
                         Log.d(TAG, successLog)
-                        broadcastApiResponse("✅ Sync Success", successLog)
+                        broadcastApiResponse("✅ Success", successLog)
+                        delay(1000)
                     } else {
-                        val errorLog = "⚠️ Response body is null\nHTTP Status: ${response.code()}\n\nThe server returned success but no data."
+                        val errorLog = "⚠️ Empty response\nHTTP: ${response.code()}"
                         Log.w(TAG, errorLog)
-                        broadcastApiResponse("⚠️ Empty Response", errorLog)
+                        broadcastApiResponse("⚠️ Empty", errorLog)
+                        delay(1000)
                     }
                 } else {
                     database.callLogDao().incrementSyncAttempts(call.id, System.currentTimeMillis())
@@ -362,39 +384,36 @@ class CallLogService : Service() {
                     val errorBody = response.errorBody()?.string() ?: "No error details"
                     val errorLog = buildString {
                         appendLine("❌ SYNC FAILED")
-                        appendLine("HTTP Status: ${response.code()} ${response.message()}")
-                        appendLine("\nServer Error Response:")
+                        appendLine("═".repeat(50))
+                        appendLine("📊 HTTP: ${response.code()} ${response.message()}")
+                        appendLine()
+                        appendLine("🔴 ERROR:")
                         appendLine(errorBody)
-                        appendLine("\nRequest Sent:")
-                        appendLine("name: ${espoRequest.name}")
-                        appendLine("status: ${espoRequest.status}")
-                        appendLine("direction: ${espoRequest.direction}")
-                        appendLine("cSeconds: ${espoRequest.cSeconds}")
-                        appendLine("dateStart: ${espoRequest.dateStart}")
-                        appendLine("\nCall Details:")
-                        appendLine("Phone: ${call.phoneNumber}")
-                        appendLine("Type: ${call.getCallTypeString()}")
-                        appendLine("Duration: ${call.duration}s")
+                        appendLine()
+                        appendLine("📤 REQUEST:")
+                        appendLine(requestJson)
                     }
                     
-                    Log.e(TAG, "Failed to sync call: ${response.code()} - ${response.message()}")
-                    Log.e(TAG, "Error body: $errorBody")
-                    broadcastApiResponse("❌ Sync Failed", errorLog)
+                    Log.e(TAG, errorLog)
+                    broadcastApiResponse("❌ Failed", errorLog)
+                    delay(1000)
                 }
             } catch (e: Exception) {
                 database.callLogDao().incrementSyncAttempts(call.id, System.currentTimeMillis())
                 
                 val exceptionLog = buildString {
                     appendLine("❌ EXCEPTION")
-                    appendLine("Phone: ${call.phoneNumber}")
-                    appendLine("Error: ${e.javaClass.simpleName}")
+                    appendLine("═".repeat(50))
+                    appendLine("Type: ${e.javaClass.simpleName}")
                     appendLine("Message: ${e.message}")
-                    appendLine("\nStack trace:")
-                    appendLine(e.stackTraceToString().take(500))
+                    appendLine()
+                    appendLine("Stack:")
+                    appendLine(e.stackTraceToString())
                 }
                 
-                Log.e(TAG, "Exception syncing call: ${call.phoneNumber}", e)
+                Log.e(TAG, exceptionLog, e)
                 broadcastApiResponse("❌ Exception", exceptionLog)
+                delay(1000)
             }
         }
         
@@ -444,17 +463,45 @@ class CallLogService : Service() {
             }
         }
         
+        // Create phoneNumbersMap with user's own phone number
+        val ownPhoneNumber = configManager.phoneNumber
+        val phoneNumbersMap = if (!ownPhoneNumber.isNullOrBlank()) {
+            mapOf("primary" to ownPhoneNumber)
+        } else {
+            emptyMap()
+        }
+        
+        // Create description with self phone number
+        val description = if (!ownPhoneNumber.isNullOrBlank()) {
+            "Your number is $ownPhoneNumber"
+        } else {
+            null
+        }
+        
         // Return request with all fields matching your API structure
         return EspoCallRequest(
             name = callName,
             status = status,
             direction = direction,
             phone = call.phoneNumber,
-            cSeconds = call.duration.toString(),
+            description = description,
+            cSeconds = call.duration.toInt(),
             deleted = false,
             dateStart = callStartTime,
             duration = null,
             reminders = emptyList(),
+            phoneNumbersMap = phoneNumbersMap,
+            
+            // Additional fields with 'c' prefix to match ESPO schema
+            cContactName = call.contactName?.takeIf { it.isNotBlank() },
+            cCallType = call.getCallTypeString(),
+            cGeocodedLocation = call.geocodedLocation?.takeIf { it.isNotBlank() },
+            cCountryIso = call.countryIso?.takeIf { it.isNotBlank() },
+            cPhoneAccountId = call.phoneAccountId?.takeIf { it.isNotBlank() },
+            cVoicemailTranscription = call.voicemailTranscription?.takeIf { it.isNotBlank() },
+            cDataUsage = call.dataUsage?.toInt(),
+            cNumberPresentation = call.getNumberPresentationString(),
+            
             parentName = null,
             accountName = null,
             usersIds = emptyList(),

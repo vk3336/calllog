@@ -1,5 +1,6 @@
 package com.example.calllogger.network
 
+import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -44,10 +45,14 @@ class RetrofitClient private constructor() {
             .writeTimeout(30, TimeUnit.SECONDS)
             .build()
         
+        // Configure Gson to exclude null values from JSON
+        val gson = GsonBuilder()
+            .create() // By default, Gson excludes null values
+        
         val retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
         
         return retrofit.create(EspoApiService::class.java)
