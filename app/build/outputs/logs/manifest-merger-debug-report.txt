@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-70:12
-INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-70:12
-INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-70:12
-INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-70:12
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-71:12
+INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-71:12
+INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-71:12
+INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-71:12
 MERGED from [androidx.databinding:viewbinding:7.4.2] C:\Users\URVI\.gradle\caches\transforms-3\f796f53cfce1ba95faf3a9fbe11fa4fa\transformed\viewbinding-7.4.2\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.room:room-ktx:2.5.2] C:\Users\URVI\.gradle\caches\transforms-3\04b46dc4d7b210a6c280a3610f0c1471\transformed\room-ktx-2.5.2\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\URVI\.gradle\caches\transforms-3\dacdabe2f032752db3ab766583820ecb\transformed\material-1.9.0\AndroidManifest.xml:17:1-26:12
@@ -56,22 +56,22 @@ MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\URVI\.gradle\cac
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\URVI\.gradle\caches\transforms-3\c50b2e37ed18c551992683b221891029\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] C:\Users\URVI\.gradle\caches\transforms-3\7899cb7e1aaa895d65f9d8770777ca9f\transformed\print-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.3.0] C:\Users\URVI\.gradle\caches\transforms-3\e7779430f21b33a1299ff9d6d8fcf230\transformed\annotation-experimental-1.3.0\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-70:12
-INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-70:12
-INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-70:12
+INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-71:12
+INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-71:12
+INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-71:12
 	package
 		INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-70:12
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-71:12
 		INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-70:12
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-71:12
 		INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml
 	xmlns:tools
 		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-70:12
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:1-71:12
 		INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:2:11-69
@@ -83,46 +83,50 @@ uses-permission#android.permission.READ_PHONE_STATE
 ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:6:5-75
 	android:name
 		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:6:22-72
-uses-permission#android.permission.FOREGROUND_SERVICE
+uses-permission#android.permission.READ_PHONE_NUMBERS
 ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:7:5-77
-MERGED from [androidx.work:work-runtime:2.8.1] C:\Users\URVI\.gradle\caches\transforms-3\ca0a0edcb6fcc92176fc103ddd1638f1\transformed\work-runtime-2.8.1\AndroidManifest.xml:26:5-77
-MERGED from [androidx.work:work-runtime:2.8.1] C:\Users\URVI\.gradle\caches\transforms-3\ca0a0edcb6fcc92176fc103ddd1638f1\transformed\work-runtime-2.8.1\AndroidManifest.xml:26:5-77
 	android:name
 		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:7:22-74
+uses-permission#android.permission.FOREGROUND_SERVICE
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:8:5-77
+MERGED from [androidx.work:work-runtime:2.8.1] C:\Users\URVI\.gradle\caches\transforms-3\ca0a0edcb6fcc92176fc103ddd1638f1\transformed\work-runtime-2.8.1\AndroidManifest.xml:26:5-77
+MERGED from [androidx.work:work-runtime:2.8.1] C:\Users\URVI\.gradle\caches\transforms-3\ca0a0edcb6fcc92176fc103ddd1638f1\transformed\work-runtime-2.8.1\AndroidManifest.xml:26:5-77
+	android:name
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:8:22-74
 uses-permission#android.permission.FOREGROUND_SERVICE_PHONE_CALL
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:8:5-88
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:9:5-88
 	android:name
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:8:22-85
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:9:22-85
 uses-permission#android.permission.INTERNET
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:9:5-67
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:10:5-67
 	android:name
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:9:22-64
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:10:22-64
 uses-permission#android.permission.POST_NOTIFICATIONS
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:10:5-77
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:11:5-77
 	android:name
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:10:22-74
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:11:22-74
 uses-permission#android.permission.WAKE_LOCK
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:11:5-68
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:12:5-68
 MERGED from [androidx.work:work-runtime:2.8.1] C:\Users\URVI\.gradle\caches\transforms-3\ca0a0edcb6fcc92176fc103ddd1638f1\transformed\work-runtime-2.8.1\AndroidManifest.xml:23:5-68
 MERGED from [androidx.work:work-runtime:2.8.1] C:\Users\URVI\.gradle\caches\transforms-3\ca0a0edcb6fcc92176fc103ddd1638f1\transformed\work-runtime-2.8.1\AndroidManifest.xml:23:5-68
 	android:name
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:11:22-65
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:12:22-65
 uses-permission#android.permission.READ_CONTACTS
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:12:5-72
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:13:5-72
 	android:name
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:12:22-69
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:13:22-69
 uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:13:5-81
-MERGED from [androidx.work:work-runtime:2.8.1] C:\Users\URVI\.gradle\caches\transforms-3\ca0a0edcb6fcc92176fc103ddd1638f1\transformed\work-runtime-2.8.1\AndroidManifest.xml:25:5-81
-MERGED from [androidx.work:work-runtime:2.8.1] C:\Users\URVI\.gradle\caches\transforms-3\ca0a0edcb6fcc92176fc103ddd1638f1\transformed\work-runtime-2.8.1\AndroidManifest.xml:25:5-81
-	android:name
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:13:22-78
-uses-permission#android.permission.PROCESS_OUTGOING_CALLS
 ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:14:5-81
+MERGED from [androidx.work:work-runtime:2.8.1] C:\Users\URVI\.gradle\caches\transforms-3\ca0a0edcb6fcc92176fc103ddd1638f1\transformed\work-runtime-2.8.1\AndroidManifest.xml:25:5-81
+MERGED from [androidx.work:work-runtime:2.8.1] C:\Users\URVI\.gradle\caches\transforms-3\ca0a0edcb6fcc92176fc103ddd1638f1\transformed\work-runtime-2.8.1\AndroidManifest.xml:25:5-81
 	android:name
 		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:14:22-78
+uses-permission#android.permission.PROCESS_OUTGOING_CALLS
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:15:5-81
+	android:name
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:15:22-78
 application
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:16:5-68:19
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:17:5-69:19
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\URVI\.gradle\caches\transforms-3\dacdabe2f032752db3ab766583820ecb\transformed\material-1.9.0\AndroidManifest.xml:24:5-20
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\URVI\.gradle\caches\transforms-3\dacdabe2f032752db3ab766583820ecb\transformed\material-1.9.0\AndroidManifest.xml:24:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\URVI\.gradle\caches\transforms-3\e29a28944c1e0e2379ca372250d894b8\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -146,91 +150,91 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\URVI\.gradle\cache
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.10.1] C:\Users\URVI\.gradle\caches\transforms-3\1bdade99802fa2835abd8f693af766e3\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:24:9-35
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:25:9-35
 	android:label
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:22:9-41
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:23:9-41
 	android:fullBackupContent
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:20:9-54
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:21:9-54
 	android:roundIcon
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:23:9-61
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:24:9-61
 	tools:targetApi
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:26:9-29
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:27:9-29
 	android:icon
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:21:9-56
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:22:9-56
 	android:allowBackup
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:18:9-35
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:19:9-35
 	android:theme
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:25:9-48
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:26:9-48
 	android:dataExtractionRules
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:19:9-65
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:20:9-65
 	android:name
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:17:9-46
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:18:9-46
 activity#com.example.calllogger.MainActivity
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:28:9-36:20
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:29:9-37:20
 	android:exported
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:30:13-36
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:31:13-36
 	android:theme
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:31:13-52
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:32:13-52
 	android:name
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:29:13-41
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:30:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:32:13-35:29
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:33:13-36:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:33:17-69
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:34:17-69
 	android:name
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:33:25-66
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:34:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:34:17-77
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:35:17-77
 	android:name
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:34:27-74
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:35:27-74
 activity#com.example.calllogger.SettingsActivity
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:38:9-42:58
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:39:9-43:58
 	android:parentActivityName
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:42:13-55
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:43:13-55
 	android:exported
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:40:13-37
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:41:13-37
 	android:theme
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:41:13-52
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:42:13-52
 	android:name
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:39:13-45
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:40:13-45
 service#com.example.calllogger.service.CallLogService
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:44:9-47:57
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:45:9-48:57
 	android:exported
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:46:13-37
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:47:13-37
 	android:foregroundServiceType
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:47:13-54
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:48:13-54
 	android:name
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:45:13-51
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:46:13-51
 receiver#com.example.calllogger.receiver.PhoneStateReceiver
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:49:9-56:20
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:50:9-57:20
 	android:enabled
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:52:13-35
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:53:13-35
 	android:exported
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:51:13-36
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:52:13-36
 	android:name
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:50:13-56
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:51:13-56
 intent-filter#action:name:android.intent.action.PHONE_STATE
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:53:13-55:29
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:54:13-56:29
 	android:priority
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:53:28-51
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:54:28-51
 action#android.intent.action.PHONE_STATE
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:54:17-76
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:55:17-76
 	android:name
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:54:25-73
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:55:25-73
 receiver#com.example.calllogger.receiver.CallLogReceiver
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:58:9-66:20
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:59:9-67:20
 	android:enabled
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:61:13-35
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:62:13-35
 	android:exported
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:60:13-36
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:61:13-36
 	android:name
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:59:13-53
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:60:13-53
 intent-filter#action:name:android.intent.action.NEW_OUTGOING_CALL+action:name:android.intent.action.PHONE_STATE
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:62:13-65:29
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:63:13-66:29
 action#android.intent.action.NEW_OUTGOING_CALL
-ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:64:17-82
+ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:65:17-82
 	android:name
-		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:64:25-79
+		ADDED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml:65:25-79
 uses-sdk
 INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\URVI\OneDrive\Desktop\calllog\app\src\main\AndroidManifest.xml

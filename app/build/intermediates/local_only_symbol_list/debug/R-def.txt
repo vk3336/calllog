@@ -55,7 +55,6 @@ id buttonStopService
 id buttonTestSync
 id editTextApiKey
 id editTextEspoUrl
-id editTextPhoneNumber
 id editTextSim1Name
 id editTextSim2Name
 id frameCallTypeIcon

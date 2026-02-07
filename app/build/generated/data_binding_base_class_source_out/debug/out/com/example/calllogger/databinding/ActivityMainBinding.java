@@ -45,9 +45,6 @@ public final class ActivityMainBinding implements ViewBinding {
   public final TextInputEditText editTextEspoUrl;
 
   @NonNull
-  public final TextInputEditText editTextPhoneNumber;
-
-  @NonNull
   public final RecyclerView recyclerViewCallLogs;
 
   @NonNull
@@ -81,12 +78,11 @@ public final class ActivityMainBinding implements ViewBinding {
       @NonNull Button buttonSaveConfig, @NonNull Button buttonStartService,
       @NonNull Button buttonStopService, @NonNull Button buttonTestSync,
       @NonNull TextInputEditText editTextApiKey, @NonNull TextInputEditText editTextEspoUrl,
-      @NonNull TextInputEditText editTextPhoneNumber, @NonNull RecyclerView recyclerViewCallLogs,
-      @NonNull Switch switchSyncEnabled, @NonNull TextView textViewApiResponse,
-      @NonNull TextView textViewApiStatus, @NonNull TextView textViewLastSync,
-      @NonNull TextView textViewPendingCalls, @NonNull TextView textViewServiceStatus,
-      @NonNull TextView textViewSyncStatus, @NonNull TextView textViewSyncedCalls,
-      @NonNull TextView textViewTotalCalls) {
+      @NonNull RecyclerView recyclerViewCallLogs, @NonNull Switch switchSyncEnabled,
+      @NonNull TextView textViewApiResponse, @NonNull TextView textViewApiStatus,
+      @NonNull TextView textViewLastSync, @NonNull TextView textViewPendingCalls,
+      @NonNull TextView textViewServiceStatus, @NonNull TextView textViewSyncStatus,
+      @NonNull TextView textViewSyncedCalls, @NonNull TextView textViewTotalCalls) {
     this.rootView = rootView;
     this.buttonClearResponse = buttonClearResponse;
     this.buttonSaveConfig = buttonSaveConfig;
@@ -95,7 +91,6 @@ public final class ActivityMainBinding implements ViewBinding {
     this.buttonTestSync = buttonTestSync;
     this.editTextApiKey = editTextApiKey;
     this.editTextEspoUrl = editTextEspoUrl;
-    this.editTextPhoneNumber = editTextPhoneNumber;
     this.recyclerViewCallLogs = recyclerViewCallLogs;
     this.switchSyncEnabled = switchSyncEnabled;
     this.textViewApiResponse = textViewApiResponse;
@@ -177,12 +172,6 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.editTextPhoneNumber;
-      TextInputEditText editTextPhoneNumber = ViewBindings.findChildViewById(rootView, id);
-      if (editTextPhoneNumber == null) {
-        break missingId;
-      }
-
       id = R.id.recyclerViewCallLogs;
       RecyclerView recyclerViewCallLogs = ViewBindings.findChildViewById(rootView, id);
       if (recyclerViewCallLogs == null) {
@@ -245,9 +234,9 @@ public final class ActivityMainBinding implements ViewBinding {
 
       return new ActivityMainBinding((ScrollView) rootView, buttonClearResponse, buttonSaveConfig,
           buttonStartService, buttonStopService, buttonTestSync, editTextApiKey, editTextEspoUrl,
-          editTextPhoneNumber, recyclerViewCallLogs, switchSyncEnabled, textViewApiResponse,
-          textViewApiStatus, textViewLastSync, textViewPendingCalls, textViewServiceStatus,
-          textViewSyncStatus, textViewSyncedCalls, textViewTotalCalls);
+          recyclerViewCallLogs, switchSyncEnabled, textViewApiResponse, textViewApiStatus,
+          textViewLastSync, textViewPendingCalls, textViewServiceStatus, textViewSyncStatus,
+          textViewSyncedCalls, textViewTotalCalls);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

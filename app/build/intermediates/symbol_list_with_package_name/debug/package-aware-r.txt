@@ -3236,7 +3236,6 @@ id east
 id edge
 id editTextApiKey
 id editTextEspoUrl
-id editTextPhoneNumber
 id editTextSim1Name
 id editTextSim2Name
 id edit_query

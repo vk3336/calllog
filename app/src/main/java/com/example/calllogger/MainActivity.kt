@@ -206,26 +206,23 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun loadConfiguration() {
-        binding.editTextPhoneNumber.setText(configManager.phoneNumber ?: "")
         binding.editTextEspoUrl.setText(configManager.espoBaseUrl ?: "")
         binding.editTextApiKey.setText(configManager.espoApiKey ?: "")
         binding.switchSyncEnabled.isChecked = configManager.isSyncEnabled
         
         updateSyncStatus()
+        
+        // Log detected phone number
+        val detectedPhone = configManager.phoneNumber
+        Log.d(TAG, "Auto-detected device phone number: ${detectedPhone ?: "Not available"}")
+        if (!detectedPhone.isNullOrBlank()) {
+            Toast.makeText(this, "Device number: $detectedPhone", Toast.LENGTH_SHORT).show()
+        }
     }
     
     private fun saveConfiguration() {
-        val phoneNumber = binding.editTextPhoneNumber.text.toString().trim()
         val espoUrl = binding.editTextEspoUrl.text.toString().trim()
         val apiKey = binding.editTextApiKey.text.toString().trim()
-        
-        if (phoneNumber.isEmpty()) {
-            Toast.makeText(this, "Please enter your phone number", Toast.LENGTH_SHORT).show()
-            return
-        }
-        
-        // Save phone number
-        configManager.phoneNumber = phoneNumber
         
         // Save ESPO URL - remove trailing slash if present
         val cleanUrl = espoUrl.trimEnd('/')
@@ -234,12 +231,21 @@ class MainActivity : AppCompatActivity() {
         // Save API key
         configManager.espoApiKey = apiKey
         
+        // Get auto-detected phone number
+        val phoneNumber = configManager.phoneNumber
+        
         Log.d(TAG, "Configuration saved:")
-        Log.d(TAG, "Phone: $phoneNumber")
+        Log.d(TAG, "Device Phone (auto-detected): ${phoneNumber ?: "Not available"}")
         Log.d(TAG, "ESPO URL: $cleanUrl")
         Log.d(TAG, "API Key: ${if (apiKey.isNotBlank()) "Present" else "Missing"}")
         
-        Toast.makeText(this, "Configuration saved", Toast.LENGTH_SHORT).show()
+        val message = if (!phoneNumber.isNullOrBlank()) {
+            "Configuration saved\nDevice: $phoneNumber"
+        } else {
+            "Configuration saved\n⚠️ Device number not detected"
+        }
+        
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         updateSyncStatus()
         
         // Restart service to reinitialize API with new config
@@ -248,13 +254,13 @@ class MainActivity : AppCompatActivity() {
             stopCallLogService()
             binding.root.postDelayed({
                 startCallLogService()
-                Toast.makeText(this, "Service restarted with new configuration", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Service restarted", Toast.LENGTH_SHORT).show()
             }, 1000)
         } else {
             Log.d(TAG, "ESPO not fully configured yet")
         }
         
-        // Immediately load call logs after saving phone number
+        // Immediately load call logs
         if (PermissionUtil.hasCallLogPermission(this)) {
             loadCallLogsImmediately()
         } else {
@@ -263,15 +269,15 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun updateSyncStatus() {
-        val isConfigured = configManager.isConfigured()
         val isEspoConfigured = configManager.isEspoConfigured()
         val isSyncEnabled = configManager.isSyncEnabled
+        val phoneNumber = configManager.phoneNumber
         
         binding.textViewSyncStatus.text = when {
-            !isConfigured -> "Phone number required"
-            !isEspoConfigured -> "ESPO configuration incomplete (sync disabled)"
+            phoneNumber.isNullOrBlank() -> "⚠️ Device number not detected"
+            !isEspoConfigured -> "ESPO configuration incomplete"
             !isSyncEnabled -> "Sync disabled"
-            else -> "Sync enabled"
+            else -> "✅ Sync enabled (Device: $phoneNumber)"
         }
         
         binding.switchSyncEnabled.isEnabled = isEspoConfigured

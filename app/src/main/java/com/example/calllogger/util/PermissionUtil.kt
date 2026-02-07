@@ -18,6 +18,12 @@ object PermissionUtil {
         Manifest.permission.READ_CONTACTS
     )
     
+    private val PHONE_NUMBER_PERMISSIONS = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        arrayOf(Manifest.permission.READ_PHONE_NUMBERS)
+    } else {
+        emptyArray()
+    }
+    
     private val NOTIFICATION_PERMISSIONS = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         arrayOf(Manifest.permission.POST_NOTIFICATIONS)
     } else {
@@ -25,7 +31,7 @@ object PermissionUtil {
     }
     
     fun getAllRequiredPermissions(): Array<String> {
-        return REQUIRED_PERMISSIONS + NOTIFICATION_PERMISSIONS
+        return REQUIRED_PERMISSIONS + PHONE_NUMBER_PERMISSIONS + NOTIFICATION_PERMISSIONS
     }
     
     fun hasAllPermissions(context: Context): Boolean {

@@ -471,7 +471,7 @@ class CallLogService : Service() {
             }
         }
         
-        // Get user's own phone number for cUserPhone field
+        // Get user's own phone number for cUserPhone field (already formatted with country code)
         val ownPhoneNumber = configManager.phoneNumber
         
         // Return request with all fields matching your API structure

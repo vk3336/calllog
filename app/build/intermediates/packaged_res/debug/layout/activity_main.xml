@@ -89,20 +89,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
-                    android:hint="Your Phone Number">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editTextPhoneNumber"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="phone" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
                     android:hint="ESPO CRM Base URL">
 
                     <com.google.android.material.textfield.TextInputEditText
