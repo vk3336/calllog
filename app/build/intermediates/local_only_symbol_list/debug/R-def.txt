@@ -3,9 +3,12 @@ local
 color background_light
 color black
 color card_background
+color card_background_dark
 color divider_color
 color failed_red
 color field_background
+color gradient_end
+color gradient_start
 color incoming_call
 color incoming_call_light
 color missed_call
@@ -19,10 +22,13 @@ color primary_blue_light
 color purple_200
 color purple_500
 color purple_700
+color section_header_dark
 color synced_green
 color teal_200
 color teal_700
 color text_hint
+color text_on_dark
+color text_on_dark_secondary
 color text_primary
 color text_secondary
 color transcription_background
@@ -31,6 +37,7 @@ drawable bg_call_incoming
 drawable bg_call_missed
 drawable bg_call_outgoing
 drawable bg_card_gradient
+drawable bg_card_modern
 drawable bg_status_completed
 drawable bg_status_missed
 drawable bg_status_no_answer

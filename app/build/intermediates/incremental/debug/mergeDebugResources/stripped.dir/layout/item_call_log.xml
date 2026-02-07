@@ -5,17 +5,18 @@
     style="@style/CallLogCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="10dp"
-    app:cardCornerRadius="24dp"
-    app:cardElevation="12dp"
-    android:elevation="12dp">
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="6dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="@color/white"
+    android:elevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp"
+        android:padding="14dp"
         android:background="@color/white">
 
         <!-- Header Section: Call Type Icon + Contact Info + Time -->
@@ -24,14 +25,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="12dp">
 
             <!-- Call Type Icon with Background -->
             <FrameLayout
                 android:id="@+id/frameCallTypeIcon"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_marginEnd="20dp">
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="12dp">
 
                 <View
                     android:id="@+id/viewCallTypeBackground"
@@ -41,8 +42,8 @@
 
                 <ImageView
                     android:id="@+id/imageViewCallType"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_call_incoming"
                     android:contentDescription="Call type icon" />
@@ -62,9 +63,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="John Doe"
-                    android:textSize="22sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_primary"
+                    android:maxLines="3"
                     tools:text="John Doe" />
 
                 <TextView
@@ -73,9 +75,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="From: +1 (555) 123-4567"
-                    android:textSize="16sp"
+                    android:textSize="11sp"
                     android:textColor="@color/text_secondary"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2dp"
+                    android:maxLines="2"
                     tools:text="From: +1 (555) 123-4567" />
 
                 <TextView
@@ -85,8 +88,8 @@
                     android:text="INCOMING CALL"
                     android:textStyle="bold"
                     android:textAllCaps="true"
-                    android:textSize="13sp"
-                    android:layout_marginTop="6dp"
+                    android:textSize="10sp"
+                    android:layout_marginTop="3dp"
                     tools:text="INCOMING CALL" />
 
             </LinearLayout>
@@ -96,7 +99,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="end">
+                android:gravity="end"
+                android:layout_marginStart="8dp">
 
                 <TextView
                     android:id="@+id/textViewTime"
@@ -105,7 +109,7 @@
                     android:layout_height="wrap_content"
                     android:text="2:30 PM"
                     android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:textSize="13sp"
                     android:textColor="@color/primary_blue"
                     tools:text="2:30 PM" />
 
@@ -115,67 +119,75 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dec 25, 2024"
-                    android:textSize="14sp"
+                    android:textSize="11sp"
                     android:textColor="@color/text_secondary"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2dp"
                     tools:text="Dec 25, 2024" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <!-- Sync Status Badge -->
+        <!-- Status Badges Row -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="@drawable/bg_sync_status"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="6dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="10dp">
 
-            <ImageView
-                android:id="@+id/imageViewSyncStatus"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_sync_success"
-                android:layout_marginEnd="6dp"
-                android:contentDescription="Sync status icon" />
-
-            <TextView
-                android:id="@+id/textViewSyncStatus"
+            <!-- Sync Status Badge -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Synced"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                tools:text="Synced" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_sync_status"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:layout_marginEnd="6dp">
 
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/imageViewSyncStatus"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:src="@drawable/ic_sync_success"
+                    android:layout_marginEnd="4dp"
+                    android:contentDescription="Sync status icon" />
 
-        <!-- Call Status Badge -->
-        <LinearLayout
-            android:id="@+id/layoutCallStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="@drawable/bg_status_completed"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="6dp"
-            android:layout_marginBottom="16dp">
+                <TextView
+                    android:id="@+id/textViewSyncStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Synced"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    tools:text="Synced" />
 
-            <TextView
-                android:id="@+id/textViewCallStatus"
+            </LinearLayout>
+
+            <!-- Call Status Badge -->
+            <LinearLayout
+                android:id="@+id/layoutCallStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Completed"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                tools:text="Completed" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_status_completed"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp">
+
+                <TextView
+                    android:id="@+id/textViewCallStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Completed"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    tools:text="Completed" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -185,9 +197,9 @@
             android:layout_height="wrap_content"
             android:text="📋 Complete Call Details"
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="13sp"
             android:textColor="@color/text_primary"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="8dp" />
 
         <!-- Details Grid Container -->
         <LinearLayout
@@ -200,7 +212,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="12dp">
+                android:layout_marginBottom="6dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -208,14 +220,14 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:background="@color/background_light"
-                    android:padding="12dp"
-                    android:layout_marginEnd="6dp">
+                    android:padding="8dp"
+                    android:layout_marginEnd="4dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="⏱️ Duration"
-                        android:textSize="12sp"
+                        android:textSize="10sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_secondary" />
 
@@ -224,10 +236,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="2m 30s"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="2dp"
                         tools:text="2m 30s" />
 
                 </LinearLayout>
@@ -238,14 +250,14 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:background="@color/background_light"
-                    android:padding="12dp"
-                    android:layout_marginStart="6dp">
+                    android:padding="8dp"
+                    android:layout_marginStart="4dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="🎥 Features"
-                        android:textSize="12sp"
+                        android:textSize="10sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_secondary" />
 
@@ -254,10 +266,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="HD, WiFi"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="2dp"
+                        android:maxLines="2"
                         tools:text="HD, WiFi" />
 
                 </LinearLayout>
@@ -269,7 +282,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="12dp">
+                android:layout_marginBottom="6dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -277,14 +290,14 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:background="@color/background_light"
-                    android:padding="12dp"
-                    android:layout_marginEnd="6dp">
+                    android:padding="8dp"
+                    android:layout_marginEnd="4dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="🌍 Location"
-                        android:textSize="12sp"
+                        android:textSize="10sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_secondary" />
 
@@ -293,10 +306,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="New York, NY"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="2dp"
+                        android:maxLines="2"
                         tools:text="New York, NY" />
 
                 </LinearLayout>
@@ -307,14 +321,14 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:background="@color/background_light"
-                    android:padding="12dp"
-                    android:layout_marginStart="6dp">
+                    android:padding="8dp"
+                    android:layout_marginStart="4dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="🌐 Country"
-                        android:textSize="12sp"
+                        android:textSize="10sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_secondary" />
 
@@ -323,10 +337,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="US"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="2dp"
                         tools:text="US" />
 
                 </LinearLayout>
@@ -338,7 +352,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="12dp">
+                android:layout_marginBottom="6dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -346,14 +360,14 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:background="@color/background_light"
-                    android:padding="12dp"
-                    android:layout_marginEnd="6dp">
+                    android:padding="8dp"
+                    android:layout_marginEnd="4dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="📱 SIM Card"
-                        android:textSize="12sp"
+                        android:textSize="10sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_secondary" />
 
@@ -362,10 +376,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="SIM 1"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="2dp"
+                        android:maxLines="2"
                         tools:text="SIM 1" />
 
                 </LinearLayout>
@@ -376,14 +391,14 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:background="@color/background_light"
-                    android:padding="12dp"
-                    android:layout_marginStart="6dp">
+                    android:padding="8dp"
+                    android:layout_marginStart="4dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="📞 Presentation"
-                        android:textSize="12sp"
+                        android:textSize="10sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_secondary" />
 
@@ -392,10 +407,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Allowed"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="2dp"
                         tools:text="Allowed" />
 
                 </LinearLayout>
@@ -407,7 +422,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="12dp">
+                android:layout_marginBottom="6dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -415,14 +430,14 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:background="@color/background_light"
-                    android:padding="12dp"
-                    android:layout_marginEnd="6dp">
+                    android:padding="8dp"
+                    android:layout_marginEnd="4dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="👁️ Read Status"
-                        android:textSize="12sp"
+                        android:textSize="10sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_secondary" />
 
@@ -431,10 +446,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Read"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="2dp"
                         tools:text="Read" />
 
                 </LinearLayout>
@@ -445,14 +460,14 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:background="@color/background_light"
-                    android:padding="12dp"
-                    android:layout_marginStart="6dp">
+                    android:padding="8dp"
+                    android:layout_marginStart="4dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="🆕 Entry Status"
-                        android:textSize="12sp"
+                        android:textSize="10sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_secondary" />
 
@@ -461,10 +476,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="New"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="2dp"
                         tools:text="New" />
 
                 </LinearLayout>
@@ -478,15 +493,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@color/background_light"
-                android:padding="12dp"
-                android:layout_marginBottom="12dp"
+                android:padding="8dp"
+                android:layout_marginBottom="6dp"
                 android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="📞 Via Number (Forwarded)"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_secondary" />
 
@@ -495,10 +510,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+1 (555) 987-6543"
-                    android:textSize="14sp"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_primary"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2dp"
+                    android:maxLines="2"
                     tools:text="+1 (555) 987-6543" />
 
             </LinearLayout>
@@ -510,15 +526,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@color/background_light"
-                android:padding="12dp"
-                android:layout_marginBottom="12dp"
+                android:padding="8dp"
+                android:layout_marginBottom="6dp"
                 android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="📊 Data Usage (VoIP)"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_secondary" />
 
@@ -527,10 +543,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2.5 MB"
-                    android:textSize="14sp"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_primary"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2dp"
                     tools:text="2.5 MB" />
 
             </LinearLayout>
@@ -542,15 +558,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@color/background_light"
-                android:padding="12dp"
-                android:layout_marginBottom="12dp"
+                android:padding="8dp"
+                android:layout_marginBottom="6dp"
                 android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="🏷️ Post Dial Digits"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_secondary" />
 
@@ -559,10 +575,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="123#456"
-                    android:textSize="14sp"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_primary"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2dp"
+                    android:maxLines="2"
                     tools:text="123#456" />
 
             </LinearLayout>
@@ -574,15 +591,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@color/primary_blue_light"
-                android:padding="12dp"
-                android:layout_marginBottom="12dp"
+                android:padding="8dp"
+                android:layout_marginBottom="6dp"
                 android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="🎤 Voicemail Transcription"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     android:textStyle="bold"
                     android:textColor="@color/primary_blue" />
 
@@ -591,10 +608,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Hello, this is a test voicemail message. Please call me back when you get this."
-                    android:textSize="14sp"
+                    android:textSize="11sp"
                     android:textStyle="italic"
                     android:textColor="@color/text_primary"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2dp"
+                    android:maxLines="10"
                     tools:text="Hello, this is a test voicemail message. Please call me back when you get this." />
 
             </LinearLayout>
@@ -606,16 +624,16 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/divider_color"
-            android:layout_marginVertical="12dp" />
+            android:layout_marginVertical="8dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="🔄 Sync Information"
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="13sp"
             android:textColor="@color/text_primary"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -628,14 +646,14 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:background="@color/background_light"
-                android:padding="12dp"
-                android:layout_marginEnd="6dp">
+                android:padding="8dp"
+                android:layout_marginEnd="4dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="🔄 Attempts"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_secondary" />
 
@@ -644,10 +662,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_primary"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2dp"
                     tools:text="1" />
 
             </LinearLayout>
@@ -658,14 +676,14 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:background="@color/background_light"
-                android:padding="12dp"
-                android:layout_marginStart="6dp">
+                android:padding="8dp"
+                android:layout_marginStart="4dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="🏷️ ESPO ID"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_secondary" />
 
@@ -674,10 +692,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ABC123XYZ"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_primary"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     tools:text="ABC123XYZ" />
 
             </LinearLayout>

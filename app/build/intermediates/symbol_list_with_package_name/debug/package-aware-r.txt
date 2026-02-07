@@ -1353,6 +1353,7 @@ color button_material_light
 color call_notification_answer_color
 color call_notification_decline_color
 color card_background
+color card_background_dark
 color cardview_dark_background
 color cardview_light_background
 color cardview_shadow_end_color
@@ -1406,6 +1407,8 @@ color failed_red
 color field_background
 color foreground_material_dark
 color foreground_material_light
+color gradient_end
+color gradient_start
 color highlighted_text_material_dark
 color highlighted_text_material_light
 color incoming_call
@@ -2060,6 +2063,7 @@ color secondary_text_default_material_dark
 color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
 color secondary_text_disabled_material_light
+color section_header_dark
 color switch_thumb_disabled_material_dark
 color switch_thumb_disabled_material_light
 color switch_thumb_material_dark
@@ -2070,6 +2074,8 @@ color synced_green
 color teal_200
 color teal_700
 color text_hint
+color text_on_dark
+color text_on_dark_secondary
 color text_primary
 color text_secondary
 color tooltip_background_dark
@@ -2936,6 +2942,7 @@ drawable bg_call_incoming
 drawable bg_call_missed
 drawable bg_call_outgoing
 drawable bg_card_gradient
+drawable bg_card_modern
 drawable bg_status_completed
 drawable bg_status_missed
 drawable bg_status_no_answer

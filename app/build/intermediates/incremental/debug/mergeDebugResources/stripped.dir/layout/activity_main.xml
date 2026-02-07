@@ -15,23 +15,23 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="3dp"
             android:backgroundTint="@color/primary_blue">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="20dp"
+                android:padding="14dp"
                 android:gravity="center_vertical">
 
                 <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/ic_phone"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="12dp"
                     android:tint="@color/white" />
 
                 <LinearLayout
@@ -44,7 +44,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Call Logger"
-                        android:textSize="24sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="@color/white" />
 
@@ -52,7 +52,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Monitor and sync your calls to ESPO CRM"
-                        android:textSize="14sp"
+                        android:textSize="11sp"
                         android:textColor="@color/white"
                         android:alpha="0.9" />
 
@@ -66,59 +66,81 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp">
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="14dp"
+                android:background="@color/white">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="⚙️ Configuration"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_primary"
-                    android:layout_marginBottom="16dp" />
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_phone"
+                        android:tint="@color/primary_blue"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Configuration"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary" />
+
+                </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:hint="ESPO CRM Base URL">
+                    android:layout_marginBottom="10dp"
+                    android:hint="ESPO CRM Base URL"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editTextEspoUrl"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textUri" />
+                        android:inputType="textUri"
+                        android:textSize="12sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:hint="ESPO API Key">
+                    android:layout_marginBottom="12dp"
+                    android:hint="ESPO API Key"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editTextApiKey"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPassword" />
+                        android:inputType="textPassword"
+                        android:textSize="12sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
                     android:id="@+id/buttonSaveConfig"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="48dp"
                     android:text="Save Configuration"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     android:backgroundTint="@color/primary_blue" />
 
             </LinearLayout>
@@ -129,49 +151,67 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp">
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="🎛️ Service Control"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_primary"
-                    android:layout_marginBottom="16dp" />
+                android:padding="14dp"
+                android:background="@color/white">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:gravity="center_vertical"
                     android:layout_marginBottom="12dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_phone"
+                        android:tint="@color/primary_blue"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Service Control"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp">
 
                     <Button
                         android:id="@+id/buttonStartService"
                         android:layout_width="0dp"
-                        android:layout_height="56dp"
+                        android:layout_height="48dp"
                         android:layout_weight="1"
                         android:text="Start Service"
-                        android:textSize="16sp"
-                        android:layout_marginEnd="8dp"
+                        android:textSize="13sp"
+                        android:layout_marginEnd="6dp"
                         android:backgroundTint="@color/incoming_call" />
 
                     <Button
                         android:id="@+id/buttonStopService"
                         android:layout_width="0dp"
-                        android:layout_height="56dp"
+                        android:layout_height="48dp"
                         android:layout_weight="1"
                         android:text="Stop Service"
-                        android:textSize="16sp"
-                        android:layout_marginStart="8dp"
+                        android:textSize="13sp"
+                        android:layout_marginStart="6dp"
                         android:backgroundTint="@color/failed_red" />
 
                 </LinearLayout>
@@ -181,10 +221,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Service: Stopped"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_primary"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="12dp"
                     android:gravity="center" />
 
                 <!-- Sync Settings -->
@@ -192,7 +232,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="6dp"
                     android:gravity="center_vertical">
 
                     <TextView
@@ -200,7 +240,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Enable ESPO Sync"
-                        android:textSize="16sp"
+                        android:textSize="13sp"
                         android:textColor="@color/text_primary" />
 
                     <Switch
@@ -215,17 +255,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Configuration incomplete"
-                    android:textSize="14sp"
+                    android:textSize="11sp"
                     android:textColor="@color/text_secondary"
                     android:gravity="center"
-                    android:layout_marginBottom="12dp" />
+                    android:layout_marginBottom="10dp" />
 
                 <Button
                     android:id="@+id/buttonTestSync"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="44dp"
                     android:text="🔄 Test Sync Now"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:backgroundTint="@color/pending_orange" />
 
             </LinearLayout>
@@ -236,30 +276,48 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp">
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="14dp"
+                android:background="@color/white">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="📡 ESPO API Response"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_primary"
-                    android:layout_marginBottom="16dp" />
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_phone"
+                        android:tint="@color/primary_blue"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="ESPO API Response"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary" />
+
+                </LinearLayout>
 
                 <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="250dp"
                     android:background="#F5F5F5"
-                    android:padding="12dp"
+                    android:padding="10dp"
                     android:scrollbars="vertical">
 
                     <TextView
@@ -267,7 +325,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="No API calls yet. Waiting for sync..."
-                        android:textSize="12sp"
+                        android:textSize="11sp"
                         android:textColor="@color/text_secondary"
                         android:fontFamily="monospace"
                         android:textIsSelectable="true" />
@@ -278,7 +336,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="center_vertical">
 
                     <TextView
@@ -287,7 +345,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Status: Idle"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_secondary" />
 
@@ -296,7 +354,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Clear"
-                        android:textSize="12sp"
+                        android:textSize="11sp"
                         style="?attr/materialButtonOutlinedStyle" />
 
                 </LinearLayout>
@@ -309,24 +367,42 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp">
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="14dp"
+                android:background="@color/white">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="📊 Statistics"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_primary"
-                    android:layout_marginBottom="16dp" />
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_phone"
+                        android:tint="@color/primary_blue"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Statistics"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -345,7 +421,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textSize="24sp"
+                            android:textSize="20sp"
                             android:textStyle="bold"
                             android:textColor="@color/primary_blue" />
 
@@ -353,7 +429,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Total Calls"
-                            android:textSize="12sp"
+                            android:textSize="11sp"
                             android:textColor="@color/text_secondary" />
 
                     </LinearLayout>
@@ -370,7 +446,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textSize="24sp"
+                            android:textSize="20sp"
                             android:textStyle="bold"
                             android:textColor="@color/synced_green" />
 
@@ -378,7 +454,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Synced"
-                            android:textSize="12sp"
+                            android:textSize="11sp"
                             android:textColor="@color/text_secondary" />
 
                     </LinearLayout>
@@ -395,7 +471,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textSize="24sp"
+                            android:textSize="20sp"
                             android:textStyle="bold"
                             android:textColor="@color/pending_orange" />
 
@@ -403,7 +479,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Unsynced"
-                            android:textSize="12sp"
+                            android:textSize="11sp"
                             android:textColor="@color/text_secondary" />
 
                     </LinearLayout>
@@ -415,9 +491,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Never synced"
-                    android:textSize="14sp"
+                    android:textSize="11sp"
                     android:textColor="@color/text_secondary"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="12dp"
                     android:gravity="center" />
 
             </LinearLayout>
@@ -428,28 +504,37 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp">
+            app:cardCornerRadius="12dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="14dp"
+                android:background="@color/white">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:layout_marginBottom="16dp">
+                    android:layout_marginBottom="12dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_phone"
+                        android:tint="@color/primary_blue"
+                        android:layout_marginEnd="8dp" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="📞 Recent Call Logs"
-                        android:textSize="18sp"
+                        android:text="Recent Call Logs"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary" />
 
@@ -457,17 +542,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tap to expand details"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_hint" />
+                        android:textSize="11sp"
+                        android:textColor="@color/text_hint"
+                        android:fontStyle="italic" />
 
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewCallLogs"
                     android:layout_width="match_parent"
-                    android:layout_height="600dp"
+                    android:layout_height="500dp"
                     android:background="@color/background_light"
-                    android:padding="4dp" />
+                    android:padding="2dp" />
 
             </LinearLayout>
 

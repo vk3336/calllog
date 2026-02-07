@@ -32,6 +32,10 @@
         "source": "com.example.calllogger.app-main-44:/drawable/ic_launcher_background.xml"
     },
     {
+        "merged": "com.example.calllogger.app-merged_res-42:/drawable_bg_card_modern.xml.flat",
+        "source": "com.example.calllogger.app-main-44:/drawable/bg_card_modern.xml"
+    },
+    {
         "merged": "com.example.calllogger.app-merged_res-42:/mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "com.example.calllogger.app-main-44:/mipmap-anydpi-v26/ic_launcher.xml"
     },
