@@ -37,9 +37,7 @@ data class EspoCallRequest(
     val cGeocodedLocation: String? = null,
     val cCountryIso: String? = null,
     val cPhoneAccountId: String? = null,
-    val cVoicemailTranscription: String? = null,
-    val cDataUsage: Int? = null,
-    val cNumberPresentation: String? = null,
+    val cUserPhone: String? = null,
     
     val parentName: String? = null,
     val accountName: String? = null,

@@ -336,10 +336,13 @@ class CallLogService : Service() {
                             appendLine("═".repeat(50))
                             appendLine("📊 HTTP: ${response.code()} ${response.message()}")
                             appendLine()
-                            appendLine("📥 COMPLETE RESPONSE JSON:")
+                            appendLine("📤 WHAT WE SENT:")
+                            appendLine(requestJson)
+                            appendLine()
+                            appendLine("📥 WHAT ESPO RETURNED:")
                             appendLine(responseJson)
                             appendLine()
-                            appendLine("🔍 COMPARISON:")
+                            appendLine("🔍 KEY FIELD COMPARISON:")
                             appendLine("─".repeat(50))
                             appendLine("name: ${espoRequest.name}")
                             appendLine("  →  ${espoCall.name}")
@@ -359,6 +362,11 @@ class CallLogService : Service() {
                             appendLine()
                             appendLine("📌 ESPO ID: ${espoCall.id}")
                             appendLine("📅 Created: ${espoCall.createdAt}")
+                            appendLine()
+                            appendLine("💡 NOTE: Custom fields (c*), phone, and")
+                            appendLine("description are stored but not returned")
+                            appendLine("in API response. Check ESPO admin UI to")
+                            appendLine("verify they're saved.")
                             appendLine()
                             if (espoCall.name != espoRequest.name || 
                                 espoCall.status != espoRequest.status || 
@@ -463,20 +471,8 @@ class CallLogService : Service() {
             }
         }
         
-        // Create phoneNumbersMap with user's own phone number
+        // Get user's own phone number for cUserPhone field
         val ownPhoneNumber = configManager.phoneNumber
-        val phoneNumbersMap = if (!ownPhoneNumber.isNullOrBlank()) {
-            mapOf("primary" to ownPhoneNumber)
-        } else {
-            emptyMap()
-        }
-        
-        // Create description with self phone number
-        val description = if (!ownPhoneNumber.isNullOrBlank()) {
-            "Your number is $ownPhoneNumber"
-        } else {
-            null
-        }
         
         // Return request with all fields matching your API structure
         return EspoCallRequest(
@@ -484,13 +480,13 @@ class CallLogService : Service() {
             status = status,
             direction = direction,
             phone = call.phoneNumber,
-            description = description,
+            description = null,
             cSeconds = call.duration.toInt(),
             deleted = false,
             dateStart = callStartTime,
             duration = null,
             reminders = emptyList(),
-            phoneNumbersMap = phoneNumbersMap,
+            phoneNumbersMap = emptyMap(),
             
             // Additional fields with 'c' prefix to match ESPO schema
             cContactName = call.contactName?.takeIf { it.isNotBlank() },
@@ -498,9 +494,7 @@ class CallLogService : Service() {
             cGeocodedLocation = call.geocodedLocation?.takeIf { it.isNotBlank() },
             cCountryIso = call.countryIso?.takeIf { it.isNotBlank() },
             cPhoneAccountId = call.phoneAccountId?.takeIf { it.isNotBlank() },
-            cVoicemailTranscription = call.voicemailTranscription?.takeIf { it.isNotBlank() },
-            cDataUsage = call.dataUsage?.toInt(),
-            cNumberPresentation = call.getNumberPresentationString(),
+            cUserPhone = ownPhoneNumber?.takeIf { it.isNotBlank() },
             
             parentName = null,
             accountName = null,
